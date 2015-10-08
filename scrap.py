@@ -33,10 +33,10 @@ if __name__ == "__main__":
 
 """
 QUESTIONS:
-check for inclusion of dependecies (import ....)
-iterator vs. generator
-overwriting in line 16 good style?
-extract name or some customer file name option?
-main blabla?
-header
+1. check for inclusion of dependecies (import ....)
+2. iterator vs. generator
+3. overwriting in line 16 good style?
+4. extract name or some customer file name option?
+5. main blabla?
+6. header
 """
