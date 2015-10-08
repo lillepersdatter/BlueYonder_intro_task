@@ -20,9 +20,6 @@ def scrap(input_file):
        
         except urllib2.URLError, e:
             print("\n" + str(url) + " does not work.\nReason: " + e.reason +"\nError Code: " + str(e.code))
-
-        #except:
-        #    print str(url) + " does not exist"
             
         else:
             name = url.rsplit('/',1)[1] #image name extracted from url
@@ -42,4 +39,5 @@ QUESTIONS:
 4. extract name or some customer file name option?
 5. main blabla?
 6. header
+7. place to save file as argument?
 """
