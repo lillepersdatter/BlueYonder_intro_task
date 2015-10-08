@@ -18,8 +18,11 @@ def scrap(input_file):
         try:
             urllib2.urlopen(urllib2.Request(url))
        
-        except:
-            print str(url) + " does not exist"
+        except urllib2.URLError, e:
+            print("\n" + str(url) + " does not work.\nReason: " + e.reason +"\nError Code: " + str(e.code))
+
+        #except:
+        #    print str(url) + " does not exist"
             
         else:
             name = url.rsplit('/',1)[1] #image name extracted from url
