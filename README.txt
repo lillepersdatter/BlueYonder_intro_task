@@ -6,7 +6,7 @@ To dremonstrate scrap.py use the test file 'urlfile.txt' as input argument, and 
 scrap.py and urlfile.txt:
 C:\folder\containing\scrap.py\and\urlfile.txt> python scrap.py urlfile.txt
 
-Scrap.py is dependent on the following modules:
+Scrap.py is dependent on the following packages:
 requests
 concurrent.futures
 urlparse
