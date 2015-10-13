@@ -54,7 +54,7 @@ def _get_urls(urls, **kwargs):
     return res
 
 #Write reponse status to the log file saved
-def _write_to_log(url, o, **kwargs):
+def write_to_log(url, o, **kwargs):
     with open('log.txt', 'a') as log:
         if isinstance(o, Exception):
             log.write('Error: {} generated an exception: {}\n'.format(url, o))
@@ -88,7 +88,8 @@ def run(inputfile):
     with open('log.txt', 'w') as log:
         log.write('Logfile created: {} \n\n'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
     for r in _get_urls(urls, timeout=2):
-        _write_to_log(*r, count=count, n_urls=5)
+        print("Url no. {}: {}".format(count,r[0]))
+        write_to_log(*r, count=count, n_urls=5)
         count = count + 1
 
 if __name__ == "__main__":

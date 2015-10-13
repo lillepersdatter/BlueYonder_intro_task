@@ -1,12 +1,13 @@
 http://i.ytimg.com/vi/AKI45CHQJi0/hqdefault.jpg
 http://img10.deviantart.net/c730/i/2013/026/3/a/club_26__sunshine_reggae_by_vint26-d5sqz1s.jpg
 http://www.mywebserver.comimages/271947.jpg
-http://stackoverflow.com/questions/1059559/python-split-strings-with-multiple-delimiters
 http://i.ytimg.com/vi/ryNwSfFa16I/0.jpg
 
+
+http://dr.dk/
 http://webjuice.dk
 http://i.imgur.com/omprtQv.jpg
 http://some-made-up-domain.com
 http://www.foxnews.com/
 
-http://stackoverflow.com/questions/13137817/how-to-download-image-using-requests
+http://asset.dr.dk/imagescaler/?file=%2Fimages%2Farticle%2F2015%2F10%2F13%2Fherlev1_0.jpg&w=900&h=675&scaleAfter=ratio&ratio=4-3&quality=80&server=www.dr.dk
