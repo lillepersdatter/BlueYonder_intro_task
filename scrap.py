@@ -1,43 +1,45 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Oct 08 13:55:39 2015
+Created on Mon Oct 12 22:07:14 2015
 
 @author: cp
 """
 
-import sys
-import urllib, urllib2
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import requests
 
-def scrap(input_file):
-    #open file containing urls, if file doesn't exist a IOError is automatically raised
-    urlfile = open(str(input_file),'r')
+inputfile = open("urlfile.txt", 'rb')
+data = inputfile.read() #read file
+URLS = filter(None, data.splitlines()) #split on lines and remove white spaces
     
-    for url in urlfile:
-        url = url.strip() #remove leading and trailing white space        
-        #test if the url exists:        
+
+# Retrieve a single page and report the url and contents
+def load_url(url, timeout):
+    session = requests.Session()
+    resp = session.get(url, timeout=timeout)
+    resp.raise_for_status()
+    return resp
+
+# We can use a with statement to ensure threads are cleaned up promptly
+with ThreadPoolExecutor(max_workers=5) as executor:
+    # Start the load operations and mark each future with its URL
+    future_to_url = {executor.submit(load_url, url, 60): url for url in URLS}
+    
+    for future in as_completed(future_to_url):
+        url = future_to_url[future]
         try:
-            urllib2.urlopen(urllib2.Request(url))
-       
-        except urllib2.URLError, e:
-            print("\n" + str(url) + " does not work.\nReason: " + e.reason +"\nError Code: " + str(e.code))
-            
+            data = future.result()
+        except Exception as exc:
+            print('\n %r generated an exception: %s' % (url, exc))
         else:
-            name = url.rsplit('/',1)[1] #image name extracted from url
-            urllib.urlretrieve(url, name) #save url in local folder       
-        
-    urlfile.close() #close file 
-
-if __name__ == "__main__":
-   scrap(sys.argv[1])
-
-
-"""
-QUESTIONS:
-1. check for inclusion of dependecies (import ....)
-2. iterator vs. generator
-3. overwriting in line 16 good style?
-4. extract name or some customer file name option?
-5. main blabla?
-6. header
-7. place to save file as argument?
-"""
+            print('\n%r page is %d bytes' % (url, len(data.content)))
+            #test if content type is an image, print a warning if not
+            if data.headers['content-type'].split('/')[0] != 'image':
+                print("Warning: Content type is not an image. Content type: %r" % (data.headers['content-type']))
+                
+#todo:                
+#number of succesfully loads
+#hereof X number of not an image warnings
+#number of unsuccesfully loads      
+#load images
+#logfile                
